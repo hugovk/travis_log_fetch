@@ -18,36 +18,36 @@ class TestHistorical(object):
 
     def test_latest(self):
         _travis = _get_travispy()
-        repo = get_travis_repo(_travis, 'travispy/on_pypy')
+        repo = get_travis_repo(_travis, 'travispy/on_py27')
 
         builds = get_historical_builds(_travis, repo)
         build = next(builds)
-        assert build.repository_id == 2598880
+        assert build.repository_id == 2598876
         assert build.id == repo.last_build_id
 
     def test_after(self):
         _travis = _get_travispy()
-        repo = get_travis_repo(_travis, 'travispy/on_pypy')
+        repo = get_travis_repo(_travis, 'travispy/on_py27')
 
         builds = get_historical_builds(_travis, repo,
                                        _after=3, _load_jobs=False)
         build = next(builds)
-        assert build.repository_id == 2598880
+        assert build.repository_id == 2598876
         assert build.number == '2'
 
         build = next(builds)
-        assert build.repository_id == 2598880
+        assert build.repository_id == 2598876
         assert build.number == '1'
 
     def test_all_small(self):
         _travis = _get_travispy()
-        repo = get_travis_repo(_travis, 'travispy/on_pypy')
+        repo = get_travis_repo(_travis, 'travispy/on_py27')
 
         builds = get_historical_builds(_travis, repo)
 
         ids = []
         for build in builds:
-            assert build.repository_id == 2598880
+            assert build.repository_id == 2598876
             ids.append(build.id)
 
         assert ids == [53686685, 37521698, 28881355]
@@ -138,12 +138,12 @@ class TestHistorical(object):
         assert len(ids) == len(set(ids))
 
     def test_logical_single_job_build(self):
-        target = Target.from_extended_slug('travispy/on_pypy#1.1')
+        target = Target.from_extended_slug('travispy/on_py27#1.1')
 
         _travis = _get_travispy()
         job = get_historical_job(_travis, target)
 
-        assert job.repository_id == 2598880
+        assert job.repository_id == 2598876
         assert job.number == '1.1'
         assert job.id == 28881356
 

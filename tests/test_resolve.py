@@ -32,36 +32,36 @@ class TestNonExistant(object):
 class TestLive(object):
 
     def test_single(self):
-        target = Target.from_simple_slug('travispy/on_pypy')
+        target = Target.from_simple_slug('travispy/on_py27')
 
         _travis = _get_travispy()
         jobs = get_jobs(_travis, target)
         assert len(jobs) == 1
 
         job = jobs[0]
-        assert job.repository_id == 2598880
+        assert job.repository_id == 2598876
 
     def test_multiple(self):
-        target1 = Target.from_simple_slug('travispy/on_pypy')
-        target2 = Target.from_simple_slug('travispy/on_py34')
+        target1 = Target.from_simple_slug('travispy/on_py27')
+        target2 = Target.from_simple_slug('jayvdb/travis_log_fetch')
 
         _travis = _get_travispy()
         jobs = get_jobs(_travis, [target1, target2])
         assert len(jobs) == 2
-        assert jobs[0].repository_id == 2598880
-        assert jobs[1].repository_id == 2598879
+        assert jobs[0].repository_id == 2598876
+        assert jobs[1].repository_id == 6357504
 
     def test_logical_single_job_build(self):
-        target = Target.from_extended_slug('travispy/on_pypy#1')
+        target = Target.from_extended_slug('travispy/on_py27#1')
 
         _travis = _get_travispy()
         jobs = get_jobs(_travis, target)
         assert len(jobs) == 1
 
         job = jobs[0]
-        assert job.repository_id == 2598880
+        assert job.repository_id == 2598876
         assert job.number == '1.1'
-        assert job.id == 28881356
+        assert job.id == 28880836
 
     def test_logical_multiple_job_build(self):
         target = Target.from_extended_slug('menegazzo/travispy#101')

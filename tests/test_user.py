@@ -16,4 +16,4 @@ class TestUser(object):
         repos = get_user_repos(_travis, 'travispy')
 
         slugs = [repo.slug for repo in repos]
-        assert 'travispy/on_pypy' in slugs
+        assert 'travispy/on_py27' in slugs

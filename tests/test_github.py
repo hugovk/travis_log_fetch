@@ -28,7 +28,7 @@ class TestForks(object):
         if not options.access_token:
             pytest.skip("github access token needed")
         _github = _get_github()
-        forks = get_forks(_github, 'travispy/on_pypy')
+        forks = get_forks(_github, 'travispy/on_py27')
         assert len(forks) == 0
 
     def test_fork(self):
